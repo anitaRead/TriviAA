@@ -1,0 +1,37 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "react-native/react-native": true,
+    "jest/globals": true
+  },
+  "extends": ["universe", "plugin:react/recommended", "airbnb", "airbnb/hooks", "prettier"],
+  "overrides": [],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["react", "react-native", "jest"],
+  "rules": {
+    // allow .js files to contain JSX code
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+
+    // prevent eslint complaining about the "styles" variable being used before it's defined
+    "no-use-before-define": ["error", { "variables": false }],
+
+    // ignore errors for the react-navigation package and 'x is missing props in validation'
+    "react/prop-types": "off",
+
+    // Override air bnb style guide to support arrow functions
+    "react/function-component-definition": ["off", { "namedComponents": "function-declaration" }],
+
+    "react/jsx-uses-react": "off",
+
+    "react/react-in-jsx-scope": "off",
+
+    "no-console": "off"
+  }
+}
