@@ -29,7 +29,7 @@ npm start
 - Press __i__ to run in an iOS simulator
 - Press __w__ to run the app in your browser
 
-Enter the following commands to run all unit tests with coverage:
+Enter the following command to run all unit tests with coverage:
 
 ```
 npm test
