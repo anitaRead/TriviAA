@@ -17,13 +17,13 @@ const QuizPopup = ({
   const [selectedAnswer, setSelectedAnswer] = useState(null);
 
   const handleNextQuestion = () => {
+    onAnswerSelection(selectedAnswer);
     setSelectedAnswer(null);
     onNextQuestion();
   };
 
   const handleAnswerSelection = (answer) => {
     setSelectedAnswer(answer);
-    onAnswerSelection(answer);
   };
 
   const currentQuestion = data[currentQuestionIndex];
@@ -61,7 +61,7 @@ const QuizPopup = ({
                       selectedAnswer === option && styles.selectedAnswerButton,
                     ]}
                     onPress={() => handleAnswerSelection(option)}
-                    disabled={selectedAnswer !== null}
+                    // disabled={selectedAnswer !== null}
                     accessibilityLabel={option}
                   >
                     <Text style={Fonts.body}>{option}</Text>
