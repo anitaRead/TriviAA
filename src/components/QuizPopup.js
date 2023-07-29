@@ -48,8 +48,11 @@ const QuizPopup = ({
               </Text>
             </View>
           ) : (
-            <ScrollView contentContainerStyle={{ flexGrow: 1 }} accessibilityLabel="Quiz Question">
-              <Text style={[Fonts.subHeading, styles.questionText]}>
+            <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+              <Text
+                style={[Fonts.subHeading, styles.questionText]}
+                accessibilityLabel={currentQuestion.question}
+              >
                 {currentQuestion.question}
               </Text>
               <View style={styles.answersContainer}>
@@ -61,7 +64,6 @@ const QuizPopup = ({
                       selectedAnswer === option && styles.selectedAnswerButton,
                     ]}
                     onPress={() => handleAnswerSelection(option)}
-                    // disabled={selectedAnswer !== null}
                     accessibilityLabel={option}
                   >
                     <Text style={Fonts.body}>{option}</Text>
