@@ -1,14 +1,15 @@
 import { StyleSheet, View, Text, Dimensions } from 'react-native';
 import { Colors, Fonts } from '../styles';
 
-const Card = ({ header = '', bodyText, bodyTextStyle = Fonts.body }) => (
+const Card = ({
+  header = '',
+  body = '',
+  headerStyle = Fonts.subHeading,
+  bodyStyle = Fonts.body,
+}) => (
   <View style={styles.rootContainer}>
-    {header && (
-      <Text style={[Fonts.subHeading, styles.header]} accessibilityRole="header">
-        {header}
-      </Text>
-    )}
-    <Text style={[bodyTextStyle, styles.body]}>{bodyText}</Text>
+    {header && <Text style={[headerStyle, styles.header]}>{header}</Text>}
+    {body && <Text style={[bodyStyle, styles.body]}>{body}</Text>}
   </View>
 );
 

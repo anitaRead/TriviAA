@@ -19,9 +19,9 @@ const HomeScreen = () => (
     </View>
     <View>
       <Card
-        bodyTextStyle={Fonts.body}
+        bodyStyle={Fonts.body}
         header="Welcome to TriviAA!"
-        bodyText="
+        body="
       The number one quiz app to pass time on the road (probably)!  
       Fancy yourself a quizzer?  
       Show off your smarts with questions on History, Geography, Entertainment and more..."

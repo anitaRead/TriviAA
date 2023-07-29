@@ -83,7 +83,7 @@ const QuizScreen = () => {
             accessibilityRole="button"
           >
             <View>
-              <Card bodyText={item.title} />
+              <Card body={item.title} />
             </View>
           </TouchableOpacity>
         )}
