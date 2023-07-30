@@ -1,12 +1,21 @@
 import axios from 'axios';
+import { decode } from 'html-entities';
 
 const BASE_URL = 'https://opentdb.com/api.php';
+
+const decodeQuizData = (data) =>
+  data.results.map((question) => ({
+    question: decode(question.question),
+    correct_answer: decode(question.correct_answer),
+    incorrect_answers: question.incorrect_answers.map((answer) => decode(answer)),
+  }));
 
 // Function to fetch 10 random questions
 export const fetchRandomQuestions = async () => {
   try {
     const { data } = await axios.get(`${BASE_URL}?amount=10&difficulty=easy&type=multiple`);
-    return data.results;
+    const decodedResults = decodeQuizData(data);
+    return decodedResults;
   } catch (error) {
     console.error('Error fetching random questions', error);
     return [];
@@ -19,7 +28,8 @@ export const fetchVideoGameQuestions = async () => {
     const { data } = await axios.get(
       `${BASE_URL}?amount=10&category=15&difficulty=easy&type=multiple`
     );
-    return data.results;
+    const decodedResults = decodeQuizData(data);
+    return decodedResults;
   } catch (error) {
     console.error('Error fetching video game questions', error);
     return [];
@@ -32,7 +42,8 @@ export const fetchMovieQuestions = async () => {
     const { data } = await axios.get(
       `${BASE_URL}?amount=10&category=11&difficulty=easy&type=multiple`
     );
-    return data.results;
+    const decodedResults = decodeQuizData(data);
+    return decodedResults;
   } catch (error) {
     console.error('Error fetching movie questions', error);
     return [];
@@ -45,7 +56,8 @@ export const fetchHistoryQuestions = async () => {
     const { data } = await axios.get(
       `${BASE_URL}?amount=10&category=23&difficulty=easy&type=multiple`
     );
-    return data.results;
+    const decodedResults = decodeQuizData(data);
+    return decodedResults;
   } catch (error) {
     console.error('Error fetching history questions', error);
     return [];
@@ -58,7 +70,8 @@ export const fetchGeographyQuestions = async () => {
     const { data } = await axios.get(
       `${BASE_URL}?amount=10&category=22&difficulty=easy&type=multiple`
     );
-    return data.results;
+    const decodedResults = decodeQuizData(data);
+    return decodedResults;
   } catch (error) {
     console.error('Error fetching geography questions', error);
     return [];
@@ -71,7 +84,8 @@ export const fetchBoardGameQuestions = async () => {
     const { data } = await axios.get(
       `${BASE_URL}?amount=10&category=16&difficulty=easy&type=multiple`
     );
-    return data.results;
+    const decodedResults = decodeQuizData(data);
+    return decodedResults;
   } catch (error) {
     console.error('Error fetching board game questions', error);
     return [];
@@ -84,7 +98,8 @@ export const fetchScienceQuestions = async () => {
     const { data } = await axios.get(
       `${BASE_URL}?amount=10&category=17&difficulty=easy&type=multiple`
     );
-    return data.results;
+    const decodedResults = decodeQuizData(data);
+    return decodedResults;
   } catch (error) {
     console.error('Error fetching science questions', error);
     return [];
@@ -97,7 +112,8 @@ export const fetchAnimalQuestions = async () => {
     const { data } = await axios.get(
       `${BASE_URL}?amount=10&category=27&difficulty=easy&type=multiple`
     );
-    return data.results;
+    const decodedResults = decodeQuizData(data);
+    return decodedResults;
   } catch (error) {
     console.error('Error fetching animals questions', error);
     return [];
@@ -110,7 +126,8 @@ export const fetchCelebrityQuestions = async () => {
     const { data } = await axios.get(
       `${BASE_URL}?amount=10&category=26&difficulty=easy&type=multiple`
     );
-    return data.results;
+    const decodedResults = decodeQuizData(data);
+    return decodedResults;
   } catch (error) {
     console.error('Error fetching celebrity questions', error);
     return [];
