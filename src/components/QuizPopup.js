@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { View, Text, Modal, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { AntDesign, Feather } from '@expo/vector-icons';
 
@@ -14,20 +14,37 @@ const QuizPopup = ({
   onClose,
   quizCompleted,
 }) => {
+  const [question, setQuestion] = useState('');
+  const [answers, setAnswers] = useState([]);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
 
-  const handleNextQuestion = () => {
-    onAnswerSelection(selectedAnswer);
-    setSelectedAnswer(null);
-    onNextQuestion();
+  useEffect(() => {
+    const currentQuestion = data[currentQuestionIndex];
+    setQuestion(currentQuestion.question);
+
+    const currentAnswers = [...currentQuestion.incorrect_answers, currentQuestion.correct_answer];
+    const shuffledAnswers = shuffleAnswers(currentAnswers);
+    setAnswers(shuffledAnswers);
+  }, [currentQuestionIndex, data]);
+
+  const shuffleAnswers = (answersList) => {
+    const shuffledAnswers = [...answersList];
+    for (let i = 0; i < answersList.length; i += 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledAnswers[i], shuffledAnswers[j]] = [shuffledAnswers[j], shuffledAnswers[i]];
+    }
+    return shuffledAnswers;
   };
 
   const handleAnswerSelection = (answer) => {
     setSelectedAnswer(answer);
   };
 
-  const currentQuestion = data[currentQuestionIndex];
-  const currentAnswers = [...currentQuestion.incorrect_answers, currentQuestion.correct_answer];
+  const handleNextQuestion = () => {
+    onAnswerSelection(selectedAnswer);
+    setSelectedAnswer(null);
+    onNextQuestion();
+  };
 
   return (
     <Modal visible={visible} transparent>
@@ -49,14 +66,11 @@ const QuizPopup = ({
             </View>
           ) : (
             <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-              <Text
-                style={[Fonts.subHeading, styles.questionText]}
-                accessibilityLabel={currentQuestion.question}
-              >
-                {currentQuestion.question}
+              <Text style={[Fonts.subHeading, styles.questionText]} accessibilityLabel={question}>
+                {question}
               </Text>
               <View style={styles.answersContainer}>
-                {currentAnswers.map((option) => (
+                {answers.map((option) => (
                   <TouchableOpacity
                     key={option}
                     style={[
